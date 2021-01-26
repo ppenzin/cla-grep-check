@@ -11,7 +11,8 @@ jobs:
         uses: actions/checkout@v1
       - run: |
           echo Checking contribution agreement for $USER
-          tail -n +36 Contribution\ Agreement.md | awk -F\| '{print $3}' | grep -wq $USER
+          tail -n +36 Contribution\ Agreement.md
+          tail -n +36 Contribution\ Agreement.md | awk -F\| '{print $3}' | grep -w $USER
         env:
           USER: ${{ github.actor }}
 
