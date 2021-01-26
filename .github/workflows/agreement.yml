@@ -1,0 +1,15 @@
+name: "Contribution Agreement"
+on:
+  pull_request_target:
+    types: [opened,synchronize]
+
+jobs:
+  AgreementCheck:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo Checking contribution agreement for $USER
+          tail -n +36 Contribution\ Agreement.md | awk -F\| '{print $3}' | grep -wq $USER
+        env:
+          USER: $({ github.actor }}
+
