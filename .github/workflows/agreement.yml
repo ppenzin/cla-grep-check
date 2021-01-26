@@ -7,9 +7,11 @@ jobs:
   AgreementCheck:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       - run: |
           echo Checking contribution agreement for $USER
           tail -n +36 Contribution\ Agreement.md | awk -F\| '{print $3}' | grep -wq $USER
         env:
-          USER: $({ github.actor }}
+          USER: ${{ github.actor }}
 
